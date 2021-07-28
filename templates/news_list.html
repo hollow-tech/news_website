@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Новости:</h1>
+{% for tag in tags %}
+    <a href="{% url 'news_by_tag' tag.slug %}">{{ tag.name }}</a>
+{% endfor %}
+{% for news in news_list %}
+<div class="col-md-8 mt-4 mb-4" style="background-color:#6d6e70;">
+    <div class="n_list">
+        <h4>
+            <a href="{{ news.get_absolute_url }}">{{  news }}</a>
+        </h4>
+    </div>
+    {% for tag in news.tags.all %}
+        <a href="{% url 'news_by_tag' tag.slug %}">{{ tag.name }}</a>
+    {% endfor %}
+</div>
+{% endfor %}
+
+
+{% endblock %}

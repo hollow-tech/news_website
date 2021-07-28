@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load hitcount_tags %}
+
+{% block content %}
+
+<h3>{{ news.title }} | {% get_hit_count for news %} <i class="fa fa-eye" aria-hidden="true"></i></h3>
+<p>{{ news.text }}</p>
+
+<div class="desc1-left col-md-6">
+    <img src="{{ news.image.url }}" class="img-fluid" alt="">
+</div>
+
+{% for tag in news.tags.all %}
+    <a href="{% url 'news_by_tag' tag.slug %}">{{ tag.name }}</a>
+{% endfor %}
+
+{% endblock %}
